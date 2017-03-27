@@ -1,38 +1,36 @@
 package com.product.api.model;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.constraints.NotNull;
-
-import org.springframework.data.mongodb.core.mapping.Document;
-@Document(collection="products")
 public class Product {
-	@NotNull
-	private BigInteger id;
-	private String name;	
-	private CurrentPrice  currentPrice ;
-	public BigInteger getId() {
-		return id;
+
+	private Item item;
+
+	private DeepRedLabels deep_red_labels;
+
+	private AvailableToPromiseNetwork available_to_promise_network;
+
+	public Item getItem() {
+		return item;
 	}
-	public void setId(BigInteger id) {
-		this.id = id;
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
-	public String getName() {
-		return name;
+
+	public DeepRedLabels getDeep_red_labels() {
+		return deep_red_labels;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setDeep_red_labels(DeepRedLabels deep_red_labels) {
+		this.deep_red_labels = deep_red_labels;
 	}
-	public CurrentPrice getCurrentPrice() {
-		return currentPrice;
+
+	public AvailableToPromiseNetwork getAvailable_to_promise_network() {
+		return available_to_promise_network;
 	}
-	public void setCurrentPrice(CurrentPrice currentPrice) {
-		this.currentPrice = currentPrice;
+
+	public void setAvailable_to_promise_network(
+			AvailableToPromiseNetwork available_to_promise_network) {
+		this.available_to_promise_network = available_to_promise_network;
 	}
-	
-	
-	
 
 }

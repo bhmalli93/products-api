@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.product.api.model.Product;
+import com.product.api.model.Products;
 import com.product.api.service.ProductService;
 
 @RestController
@@ -27,7 +27,7 @@ public class ProductController {
 	@GetMapping(path = "/{id}",produces={MediaType.APPLICATION_JSON_VALUE} )
 	public ResponseEntity getProduct(@PathVariable BigInteger id){
 
-		Product product = productService.getProduct(id);
+		Products product = productService.getProduct(id);
 		if(product!=null){
 		return new ResponseEntity(product, HttpStatus.OK);
 		}
@@ -37,7 +37,7 @@ public class ProductController {
 	}
 	
 	@PutMapping(path = "/{id}",consumes={MediaType.APPLICATION_JSON_VALUE} )
-	public void updatePriceByProduct(@PathVariable BigInteger id,@RequestBody Product product){
+	public void updatePriceByProduct(@PathVariable BigInteger id,@RequestBody Products product){
 
 		productService.updatePriceByProduct(product);
 		

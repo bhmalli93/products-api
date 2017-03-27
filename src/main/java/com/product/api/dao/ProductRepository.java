@@ -2,8 +2,8 @@ package com.product.api.dao;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.product.api.model.Product;
+import com.product.api.model.Products;
 
-public interface ProductRepository extends MongoRepository<Product, String>{
+public interface ProductRepository extends MongoRepository<Products, String>{
 	
 }

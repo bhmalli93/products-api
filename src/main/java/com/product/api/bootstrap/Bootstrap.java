@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.product.api.dao.ProductDao;
 import com.product.api.dao.ProductRepository;
-import com.product.api.model.Product;
+import com.product.api.model.Products;
 import com.product.api.service.ProductService;
 @SpringBootApplication
 @RestController
@@ -37,8 +37,7 @@ public class Bootstrap extends SpringServletContainerInitializer{
 	 @GetMapping("/hello")
 	 public long sayHello(){
 		 
-		  long count =productRepository.count();
-		 
+		 long count =productRepository.count();		 
 		 System.out.println("count is ************"+count);
 		 return count;
 		 
@@ -46,9 +45,9 @@ public class Bootstrap extends SpringServletContainerInitializer{
 	 
 	 @GetMapping(path = "/{id}",produces={MediaType.APPLICATION_JSON_VALUE} )
 	 @ResponseBody
-		public Product getProduct(@PathVariable BigInteger id){
+		public Products getProduct(@PathVariable BigInteger id){
 
-			Product product = productDao.getProduct(id);
+			Products product = productDao.getProduct(id);
 			
 			return product;
 		}
