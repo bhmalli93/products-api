@@ -1,14 +1,12 @@
 package com.product.api.controller;
 
-import java.math.BigInteger;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +21,9 @@ import com.product.api.validator.ProductValidator;
 @RequestMapping(value="/products")
 public class ProductController {
 	
+	final static Logger logger = Logger.getLogger(ProductController.class);
+
+	
 	@Autowired
 	ProductService productService;
 	@Autowired
@@ -32,10 +33,14 @@ public class ProductController {
 	
 	@GetMapping(path = "/{id}",produces={MediaType.APPLICATION_JSON_VALUE} )
 	public ResponseEntity getProduct(@PathVariable(required = true) Long id){
+		
+		if(logger.isDebugEnabled()){
+			logger.debug("Inside getProduct Path Param Product Id is  : " + id);
+		}
 		Products product;		 
 		fault= productValidator.validate(id);
 		if(fault.getCode()!=null){
-			return new ResponseEntity(fault, HttpStatus.NOT_FOUND);
+			return new ResponseEntity(fault, HttpStatus.BAD_REQUEST);
 		}		
 		product = productService.getProduct(id);
 		if (product != null) {
@@ -45,11 +50,18 @@ public class ProductController {
 		}
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping(path = "/{id}",consumes={MediaType.APPLICATION_JSON_VALUE} )
-	public void updatePriceByProduct(@PathVariable BigInteger id,@RequestBody Products product){		
-
-		productService.updatePriceByProduct(product);
-		
+	public ResponseEntity updatePriceByProduct(@PathVariable Long id,@RequestBody Products product){
+		if(logger.isDebugEnabled()){
+			logger.debug("Path Param Inside updatePriceByProduct Method Id is  : " + id);
+		}		
+		fault= productValidator.validate(id,product.getId());
+		if(fault.getCode()!=null){
+			return new ResponseEntity(fault, HttpStatus.BAD_REQUEST);
+		}		
+		productService.updatePriceByProduct(product);		
+		return new ResponseEntity(HttpStatus.OK);		
 	}
 
 }

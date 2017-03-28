@@ -1,5 +1,6 @@
 package com.product.api.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,11 @@ import com.product.api.dao.ProductRepository;
 import com.product.api.exception.Fault;
 import com.product.api.model.ProductResponse;
 import com.product.api.model.Products;
+import com.product.api.validator.ProductValidator;
 @Service
 public class ProductServiceImpl implements ProductService{
+	
+	final static Logger logger = Logger.getLogger(ProductServiceImpl.class);
 	
 	@Autowired
 	ProductRepository productRepository;
@@ -22,14 +26,20 @@ public class ProductServiceImpl implements ProductService{
 	Fault fault;
 
 	public Products getProduct(Long productId) {
+		
+		if(logger.isDebugEnabled()){
+			logger.debug("Inside getProduct Path Param Product Id is  : " + productId);
+		}
 		Products product=null;
 		String id = (String) productId.toString();
 		String productName = getProductName(id);
 		if(productName !=null){		
 			product= productRepository.findOne(id);
+			logger.info("productId***"+product.getId());
 		}
 		if(product !=null){
 		  product.setName(productName);
+		  logger.info("productName***"+productName);
 		}else{
 			fault.setCode(HttpStatus.NOT_FOUND);
 			fault.setErrorMsg(Constants.ERROR_MSG_PRICE);
@@ -41,7 +51,7 @@ public class ProductServiceImpl implements ProductService{
 	private String getProductName(String productId) {
 		
 		String productUri =getProductURI(productId);
-		System.out.println("*******************"+productUri);
+		logger.info("productUri*******************"+productUri);
 		String productName = null;
 		ProductResponse result=null;
 		try{		
@@ -54,7 +64,7 @@ public class ProductServiceImpl implements ProductService{
 	    
 	    if(result != null){
 	    	productName = result.getProduct().getItem().getProduct_description().getTitle();	    	
-	    	System.out.println("*****productName*****"+productName);
+	    	logger.info("*****productName*****"+productName);
 		}
 
 		return productName;
