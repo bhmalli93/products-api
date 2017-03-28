@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.product.api.exception.Fault;
 import com.product.api.model.Products;
 import com.product.api.service.ProductService;
+import com.product.api.validator.ProductValidator;
 
 @RestController
 @RequestMapping(value="/products")
@@ -25,11 +26,17 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	@Autowired
+	ProductValidator productValidator;
+	@Autowired
 	Fault fault;
 	
 	@GetMapping(path = "/{id}",produces={MediaType.APPLICATION_JSON_VALUE} )
-	public ResponseEntity getProduct(@PathVariable Long id){
-		Products product;
+	public ResponseEntity getProduct(@PathVariable(required = true) Long id){
+		Products product;		 
+		fault= productValidator.validate(id);
+		if(fault.getCode()!=null){
+			return new ResponseEntity(fault, HttpStatus.NOT_FOUND);
+		}		
 		product = productService.getProduct(id);
 		if (product != null) {
 			return new ResponseEntity(product, HttpStatus.OK);

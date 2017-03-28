@@ -22,10 +22,12 @@ public class ProductServiceImpl implements ProductService{
 	Fault fault;
 
 	public Products getProduct(Long productId) {
-
+		Products product=null;
 		String id = (String) productId.toString();
 		String productName = getProductName(id);
-		Products product = productRepository.findOne(id);
+		if(productName !=null){		
+			product= productRepository.findOne(id);
+		}
 		if(product !=null){
 		  product.setName(productName);
 		}else{
@@ -40,7 +42,7 @@ public class ProductServiceImpl implements ProductService{
 		
 		String productUri =getProductURI(productId);
 		System.out.println("*******************"+productUri);
-		String productName = "";
+		String productName = null;
 		ProductResponse result=null;
 		try{		
 			result = restTemplate.getForObject(productUri, ProductResponse.class);

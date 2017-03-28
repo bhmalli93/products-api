@@ -11,6 +11,7 @@ public class Constants {
 	public static String RATING_AND_REVIEWS_STAT ="rating_and_review_statistics";	
 	public static String ERROR_MSG ="Not Found in My Retail Site";
 	public static String ERROR_MSG_PRICE ="Price Not Found Please Try different Product";
+	public static String ERROR_MSG_BAD_REQEST="Product Id Can't be Null";
 	public static String QUESTION_ANSWAR_STAT ="question_answer_statistics";
 
 	
