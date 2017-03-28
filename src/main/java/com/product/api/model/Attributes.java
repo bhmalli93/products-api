@@ -1,5 +1,8 @@
 package com.product.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Attributes {
 	
 	private String media_format;

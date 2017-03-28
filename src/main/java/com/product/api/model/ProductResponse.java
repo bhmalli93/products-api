@@ -1,6 +1,8 @@
 package com.product.api.model;
 
-public class Response {
+
+
+public class ProductResponse {
 	
 	 private Product product;
 

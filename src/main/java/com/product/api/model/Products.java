@@ -1,22 +1,18 @@
 package com.product.api.model;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="products")
 public class Products {
 	@NotNull
-	private BigInteger id;
+	private String id;
 	private String name;	
-	private CurrentPrice  currentPrice ;
-	public BigInteger getId() {
+	private CurrentPrice  current_price ;
+	public String getId() {
 		return id;
 	}
-	public void setId(BigInteger id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -25,12 +21,13 @@ public class Products {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public CurrentPrice getCurrentPrice() {
-		return currentPrice;
+	public CurrentPrice getCurrent_price() {
+		return current_price;
 	}
-	public void setCurrentPrice(CurrentPrice currentPrice) {
-		this.currentPrice = currentPrice;
+	public void setCurrent_price(CurrentPrice current_price) {
+		this.current_price = current_price;
 	}
+	
 	
 	
 	

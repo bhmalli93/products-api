@@ -1,12 +1,15 @@
 package com.product.api.model;
 
-public class Product {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-	private Item item;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Product {	
 
 	private DeepRedLabels deep_red_labels;
 
 	private AvailableToPromiseNetwork available_to_promise_network;
+	
+	private Item item;
 
 	public Item getItem() {
 		return item;

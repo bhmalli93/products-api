@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.product.api.exception.Fault;
 import com.product.api.model.Products;
 import com.product.api.service.ProductService;
 
@@ -23,21 +24,22 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	@Autowired
+	Fault fault;
 	
 	@GetMapping(path = "/{id}",produces={MediaType.APPLICATION_JSON_VALUE} )
-	public ResponseEntity getProduct(@PathVariable BigInteger id){
-
-		Products product = productService.getProduct(id);
-		if(product!=null){
-		return new ResponseEntity(product, HttpStatus.OK);
-		}
-		else{
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
+	public ResponseEntity getProduct(@PathVariable Long id){
+		Products product;
+		product = productService.getProduct(id);
+		if (product != null) {
+			return new ResponseEntity(product, HttpStatus.OK);
+		} else {
+			return new ResponseEntity(fault, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	@PutMapping(path = "/{id}",consumes={MediaType.APPLICATION_JSON_VALUE} )
-	public void updatePriceByProduct(@PathVariable BigInteger id,@RequestBody Products product){
+	public void updatePriceByProduct(@PathVariable BigInteger id,@RequestBody Products product){		
 
 		productService.updatePriceByProduct(product);
 		

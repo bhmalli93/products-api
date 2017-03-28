@@ -3,6 +3,8 @@ package com.product.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DeepRedLabels {
 	
 	 private List<Labels> labels = new ArrayList<Labels>();

@@ -1,5 +1,8 @@
 package com.product.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Fulfillment {
 	
 	private String is_po_box_prohibited;

@@ -1,5 +1,8 @@
 package com.product.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductClassification {
 	
 	private String product_type_name;

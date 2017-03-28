@@ -3,6 +3,8 @@ package com.product.api.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
 
 	private TaxCategory tax_category;
@@ -36,6 +38,8 @@ public class Item {
     private Fulfillment fulfillment;
 
     private RecallCompliance recall_compliance;
+    
+    private Manufacturer manufacturer;
 
     private String upc;
 
@@ -47,15 +51,13 @@ public class Item {
 
     private String subscription_eligible;
 
-    private String return_method;
-
-    private String manufacturer;
+    private String return_method;    
 
     private ProductBrand product_brand;
 
     private Attributes attributes;
 
-    private String return_policies;
+    private ReturnPolicies return_policies;
 
     private String dpci;
 
@@ -237,14 +239,6 @@ public class Item {
 		this.return_method = return_method;
 	}
 
-	public String getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
 	public ProductBrand getProduct_brand() {
 		return product_brand;
 	}
@@ -261,14 +255,7 @@ public class Item {
 		this.attributes = attributes;
 	}
 
-	public String getReturn_policies() {
-		return return_policies;
-	}
-
-	public void setReturn_policies(String return_policies) {
-		this.return_policies = return_policies;
-	}
-
+	
 	public String getDpci() {
 		return dpci;
 	}
@@ -276,6 +263,24 @@ public class Item {
 	public void setDpci(String dpci) {
 		this.dpci = dpci;
 	}
+
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public ReturnPolicies getReturn_policies() {
+		return return_policies;
+	}
+
+	public void setReturn_policies(ReturnPolicies return_policies) {
+		this.return_policies = return_policies;
+	}
+
+	
     
     
     
