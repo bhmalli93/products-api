@@ -12,7 +12,6 @@ import com.product.api.dao.ProductRepository;
 import com.product.api.exception.Fault;
 import com.product.api.model.ProductResponse;
 import com.product.api.model.Products;
-import com.product.api.validator.ProductValidator;
 @Service
 public class ProductServiceImpl implements ProductService{
 	
@@ -24,13 +23,14 @@ public class ProductServiceImpl implements ProductService{
 	RestTemplate restTemplate;
 	@Autowired
 	Fault fault;
+	Products product;
+	
 
 	public Products getProduct(Long productId) {
-		
 		if(logger.isDebugEnabled()){
 			logger.debug("Inside getProduct Path Param Product Id is  : " + productId);
 		}
-		Products product=null;
+		
 		String id = (String) productId.toString();
 		String productName = getProductName(id);
 		if(productName !=null){		
@@ -49,7 +49,6 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	private String getProductName(String productId) {
-		
 		String productUri =getProductURI(productId);
 		logger.info("productUri*******************"+productUri);
 		String productName = null;

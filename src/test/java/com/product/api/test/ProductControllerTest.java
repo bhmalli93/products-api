@@ -55,7 +55,7 @@ public class ProductControllerTest {
 	CurrentPrice currentPrice = new CurrentPrice();
 	currentPrice.setCurrency_code("USD");
 	currentPrice.setValue("13.56");
-	product.setId("13345634");	
+	product.setId("13860428");	
 	@SuppressWarnings("rawtypes")
 	ResponseEntity response =	productController.updatePriceByProduct((long) 13860428, product);
 	Assert.assertEquals(HttpStatus.OK, response.getStatusCode());	

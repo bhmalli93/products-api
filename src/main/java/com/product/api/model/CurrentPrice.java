@@ -1,8 +1,7 @@
 package com.product.api.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="currentprice")
+//@Document(collection="currentprice")
 public class CurrentPrice {
 
 	private String value;

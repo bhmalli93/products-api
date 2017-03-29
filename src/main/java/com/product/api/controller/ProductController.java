@@ -1,7 +1,10 @@
 package com.product.api.controller;
 
+import io.swagger.annotations.ApiOperation;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,26 +22,27 @@ import com.product.api.validator.ProductValidator;
 
 @RestController
 @RequestMapping(value="/products")
+@Scope(value="request")
 public class ProductController {
 	
 	final static Logger logger = Logger.getLogger(ProductController.class);
 
 	
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
 	@Autowired
-	ProductValidator productValidator;
+	private ProductValidator productValidator;	
+	Products  product;
 	@Autowired
 	Fault fault;
-	
 	@GetMapping(path = "/{id}",produces={MediaType.APPLICATION_JSON_VALUE} )
+	@ApiOperation(value="",notes="this Service will fetch products price information")
 	public ResponseEntity getProduct(@PathVariable(required = true) Long id){
 		
 		if(logger.isDebugEnabled()){
 			logger.debug("Inside getProduct Path Param Product Id is  : " + id);
-		}
-		Products product;		 
-		fault= productValidator.validate(id);
+		}	
+		fault = productValidator.validate(id);
 		if(fault.getCode()!=null){
 			return new ResponseEntity(fault, HttpStatus.BAD_REQUEST);
 		}		
@@ -52,6 +56,7 @@ public class ProductController {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping(path = "/{id}",consumes={MediaType.APPLICATION_JSON_VALUE} )
+	@ApiOperation(value="",notes="this Service will update products current price information")
 	public ResponseEntity updatePriceByProduct(@PathVariable Long id,@RequestBody Products product){
 		if(logger.isDebugEnabled()){
 			logger.debug("Path Param Inside updatePriceByProduct Method Id is  : " + id);

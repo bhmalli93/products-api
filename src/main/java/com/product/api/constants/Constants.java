@@ -12,6 +12,7 @@ public class Constants {
 	public static String ERROR_MSG ="Not Found in My Retail Site";
 	public static String ERROR_MSG_PRICE ="Price Not Found Please Try different Product";
 	public static String ERROR_MSG_BAD_REQEST="Product Id Can't be Null";
+	public static String ERROR_MSG_BAD_REQEST_MSG="Request Param ProductId and RequesBody ProductId are not same ";
 	public static String QUESTION_ANSWAR_STAT ="question_answer_statistics";
 
 	
