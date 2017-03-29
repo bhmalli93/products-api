@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.product.api.bootstrap.Bootstrap;
@@ -20,23 +21,23 @@ public class ProductServiceTest {
 	@Autowired
     private ProductService productService;
 	
-	@Autowired
-	private Fault  fault;
 	
-	Products product;
+	Fault  fault = new Fault();
+	
+	Products product= new Products();
 	     
 	@Test
 	public void testGetProduct_NotFound(){	
-	product =	productService.getProduct((long) 16483589);	
+	ResponseEntity response =	productService.getProduct((long) 16483589);	
 	Assert.assertEquals(HttpStatus.NOT_FOUND, fault.getCode());	
 		
 	}
 	
 	@Test
 	public void testGetProduct_Found(){	
-	product =	productService.getProduct((long) 13860428);	
-	Assert.assertNotNull(product);
-	Assert.assertEquals("USD",product.getCurrent_price().getCurrency_code());	
+	ResponseEntity response =	productService.getProduct((long) 13860428);	
+	Assert.assertNotNull(response);	
+	Assert.assertEquals(product,response.hasBody());	
 	Assert.assertEquals("The Big Lebowski (Blu-ray)", product.getName());	
 	
 		

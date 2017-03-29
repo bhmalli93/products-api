@@ -22,7 +22,6 @@ import com.product.api.validator.ProductValidator;
 
 @RestController
 @RequestMapping(value="/products")
-@Scope(value="request")
 public class ProductController {
 	
 	final static Logger logger = Logger.getLogger(ProductController.class);
@@ -33,12 +32,11 @@ public class ProductController {
 	@Autowired
 	private ProductValidator productValidator;	
 	Products  product;
-	@Autowired
-	Fault fault;
+	
 	@GetMapping(path = "/{id}",produces={MediaType.APPLICATION_JSON_VALUE} )
 	@ApiOperation(value="",notes="this Service will fetch products price information")
 	public ResponseEntity getProduct(@PathVariable(required = true) Long id){
-		
+		Fault fault;
 		if(logger.isDebugEnabled()){
 			logger.debug("Inside getProduct Path Param Product Id is  : " + id);
 		}	
@@ -46,18 +44,21 @@ public class ProductController {
 		if(fault.getCode()!=null){
 			return new ResponseEntity(fault, HttpStatus.BAD_REQUEST);
 		}		
-		product = productService.getProduct(id);
-		if (product != null) {
-			return new ResponseEntity(product, HttpStatus.OK);
+		ResponseEntity response = productService.getProduct(id);
+		/*if (response != null) {
+			
 		} else {
 			return new ResponseEntity(fault, HttpStatus.NOT_FOUND);
-		}
+		}*/
+		
+		return new ResponseEntity(response, HttpStatus.OK);
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PutMapping(path = "/{id}",consumes={MediaType.APPLICATION_JSON_VALUE} )
 	@ApiOperation(value="",notes="this Service will update products current price information")
 	public ResponseEntity updatePriceByProduct(@PathVariable Long id,@RequestBody Products product){
+		Fault fault;		
 		if(logger.isDebugEnabled()){
 			logger.debug("Path Param Inside updatePriceByProduct Method Id is  : " + id);
 		}		

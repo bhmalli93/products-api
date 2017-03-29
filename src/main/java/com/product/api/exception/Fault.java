@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 @ApiModel
 @Scope(value="prototype")
-@Component
 public class Fault {
 	@ApiModelProperty(value="error reason typically maps with the actual reason ")
 	private String errorReason;

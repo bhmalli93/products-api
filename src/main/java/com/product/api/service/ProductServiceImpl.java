@@ -3,6 +3,7 @@ package com.product.api.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -21,34 +22,43 @@ public class ProductServiceImpl implements ProductService{
 	ProductRepository productRepository;
 	@Autowired
 	RestTemplate restTemplate;
-	@Autowired
-	Fault fault;
-	Products product;
+	
+	
+	
 	
 
-	public Products getProduct(Long productId) {
+	public ResponseEntity getProduct(Long productId) {
+		Fault fault = new Fault();
+		Products product = new Products();
 		if(logger.isDebugEnabled()){
 			logger.debug("Inside getProduct Path Param Product Id is  : " + productId);
 		}
 		
 		String id = (String) productId.toString();
-		String productName = getProductName(id);
-		if(productName !=null){		
-			product= productRepository.findOne(id);
-			logger.info("productId***"+product.getId());
+		String productName = getProductName(id,fault);
+		if(productName !=null){	
+			try{
+				product= productRepository.findOne(id);
+				logger.info("productId***"+product.getId());
+			}catch(Exception ex){
+				fault.setCode(HttpStatus.NOT_FOUND);
+				fault.setErrorMsg(Constants.ERROR_MSG_PRICE);
+				fault.setErrorReason(Constants.ERROR_MSG_PRICE);
+			}			
 		}
 		if(product !=null){
 		  product.setName(productName);
 		  logger.info("productName***"+productName);
-		}else{
-			fault.setCode(HttpStatus.NOT_FOUND);
-			fault.setErrorMsg(Constants.ERROR_MSG_PRICE);
-			fault.setErrorReason(Constants.ERROR_MSG_PRICE);
 		}
-		return product;
+		if(fault.getCode() !=null){
+			return new ResponseEntity(fault, HttpStatus.OK);
+		}else{
+			return new ResponseEntity(product, HttpStatus.NOT_FOUND);
+		}
+		
 	}
 
-	private String getProductName(String productId) {
+	private String getProductName(String productId,Fault fault) {
 		String productUri =getProductURI(productId);
 		logger.info("productUri*******************"+productUri);
 		String productName = null;

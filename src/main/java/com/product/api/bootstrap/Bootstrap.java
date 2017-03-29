@@ -13,6 +13,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import com.product.api.exception.Fault;
 import com.product.api.validator.ProductValidator;
 @SpringBootApplication
 @EnableSwagger2
@@ -44,6 +45,6 @@ public class Bootstrap extends SpringServletContainerInitializer{
 	    public ProductValidator validate() {
 	        return new ProductValidator();
 	    }
-	   
+	 
 	   
 }

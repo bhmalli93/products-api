@@ -8,14 +8,15 @@ import org.springframework.stereotype.Component;
 import com.product.api.constants.Constants;
 import com.product.api.exception.Fault;
 
-@Component
+
 public class ProductValidator {
 	
 	final static Logger logger = Logger.getLogger(ProductValidator.class);
-	@Autowired
-	Fault fault;
+	
+	
 	
 	public Fault validate(Long id){
+		final Fault fault = new Fault();
 		if(logger.isDebugEnabled()){
 			logger.debug("Inside validate Product Id is  : " + id);
 		}
@@ -29,6 +30,7 @@ public class ProductValidator {
 	}
 	
 	public Fault validate(Long id,String productId){
+		final Fault fault = new Fault();
 		if(logger.isDebugEnabled()){
 			logger.debug("Inside validate Path Param  Id is  : " + id);
 			logger.debug("Inside validate Product Id From Body  : " + productId);
