@@ -1,10 +1,7 @@
 package com.product.api.controller;
 
-import io.swagger.annotations.ApiOperation;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +16,8 @@ import com.product.api.exception.Fault;
 import com.product.api.model.Products;
 import com.product.api.service.ProductService;
 import com.product.api.validator.ProductValidator;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value="/products")
@@ -45,11 +44,11 @@ public class ProductController {
 			return new ResponseEntity(fault, HttpStatus.BAD_REQUEST);
 		}		
 		ResponseEntity response = productService.getProduct(id);
-		/*if (response != null) {
+		if (response != null) {
 			
 		} else {
 			return new ResponseEntity(fault, HttpStatus.NOT_FOUND);
-		}*/
+		}
 		
 		return new ResponseEntity(response, HttpStatus.OK);
 	}

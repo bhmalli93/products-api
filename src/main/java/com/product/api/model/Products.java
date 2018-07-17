@@ -2,6 +2,7 @@ package com.product.api.model;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="products")
 public class Products {

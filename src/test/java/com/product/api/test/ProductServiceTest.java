@@ -29,7 +29,7 @@ public class ProductServiceTest {
 	@Test
 	public void testGetProduct_NotFound(){	
 	ResponseEntity response =	productService.getProduct((long) 16483589);	
-	Assert.assertEquals(HttpStatus.NOT_FOUND, fault.getCode());	
+	Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());	
 		
 	}
 	

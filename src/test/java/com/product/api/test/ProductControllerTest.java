@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.product.api.bootstrap.Bootstrap;
 import com.product.api.controller.ProductController;
-import com.product.api.exception.Fault;
 import com.product.api.model.CurrentPrice;
 import com.product.api.model.Products;
 
@@ -22,16 +21,7 @@ public class ProductControllerTest {
 	@Autowired
 	private ProductController  productController;
 	
-	@Autowired
-	private Fault  fault;
 	
-	@Test
-	public void testGetProduct_NotFound(){
-	@SuppressWarnings("rawtypes")
-	ResponseEntity response =	productController.getProduct((long) 16483589);	
-	Assert.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());	
-		
-	}
 	
 	@Test
 	public void testShould_Return_BadRequest(){
@@ -43,9 +33,10 @@ public class ProductControllerTest {
 	
 	@Test
 	public void testGetProductShouldReturn_OK(){
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes" })
 	ResponseEntity response =	productController.getProduct((long) 13860428);	
-	Assert.assertEquals(HttpStatus.OK, response.getStatusCode());	
+	Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+	
 		
 	}
 	
@@ -70,6 +61,8 @@ public class ProductControllerTest {
 	@SuppressWarnings("rawtypes")
 	ResponseEntity response =	productController.updatePriceByProduct(null, product);
 	Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());	
+	 
+	
 		
 	}
 

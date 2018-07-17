@@ -1,5 +1,7 @@
 This API will produce Product Pricing Information for a requested Product ID which is available in myRetail site.
 
+Technologies Used : Java, SpringBoot,MongoDB,Maven,Spring Data,GitHub,Tomcat
+
 How to Setup this Application
 
 Clone this application from GitHub Location

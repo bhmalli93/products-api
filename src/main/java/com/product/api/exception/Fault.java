@@ -16,7 +16,6 @@ public class Fault {
 	@ApiModelProperty(value="error reason typically maps with HttpStatus Code ")
 	private HttpStatus code;
 	
-	
 	public String getErrorReason() {
 		return errorReason;
 	}

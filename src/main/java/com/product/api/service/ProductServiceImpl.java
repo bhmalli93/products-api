@@ -2,6 +2,7 @@ package com.product.api.service;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements ProductService{
 			try{
 				product= productRepository.findOne(id);
 				logger.info("productId***"+product.getId());
-			}catch(Exception ex){
+			}catch(DataAccessException ex){
 				fault.setCode(HttpStatus.NOT_FOUND);
 				fault.setErrorMsg(Constants.ERROR_MSG_PRICE);
 				fault.setErrorReason(Constants.ERROR_MSG_PRICE);
